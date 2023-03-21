@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>raccoon-191.jpg</filename>
+	<path>E:\Johnson_Project\Tensorflow\training_demo\images\test\raccoon-191.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>634</width>
+		<height>445</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>raccoon</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>324</xmin>
+			<ymin>108</ymin>
+			<xmax>481</xmax>
+			<ymax>229</ymax>
+		</bndbox>
+	</object>
+</annotation>
