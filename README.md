@@ -11,7 +11,38 @@
 
 ![screenshot](./assets/screenshot.png)
 
-## 目录结构
+## Tensorflow和API的安装
+
+```
+# ## Conda ## #
+conda create -n tf2 python=3.9	//创建虚拟环境
+conda activate tf2				//切换环境
+conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0	//安装cuda和cudnn加速
+
+# ## Pip ## #
+python -m pip install tensorflow==2.10.0		//安装tensorflow
+# pip install tensorflow==2.10.0 -i https://pypi.tuna.tsinghua.edu.cn/simple	//可以用清华源
+python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"	//验证一下GPU
+```
+
+```
+# ## installation ## #
+git clone https://github.com/tensorflow/models.git	//克隆仓库
+cp -r models /path/to/tensorflow					//把model文件夹放到tensorflow目录下
+cd /path/to/tensorflow/models/research				//切换目录
+
+conda install protobuf								//安装protobuf
+protoc object_detection\protos\*.proto --python_out=.	//将*proto文件转换为*.py
+cp object_detection\packages\tf2\setup.py .			//复制
+pip install .										//安装objcet-detection
+
+# ## test ## #
+python object_detection/builders/model_builder_tf2_test.py	//验证测试一下
+```
+
+
+
+## 本仓库的目录结构
 
 ```
 training_demo/
@@ -27,13 +58,13 @@ training_demo/
 └─ README.md
 ```
 
-+ annotations 存放所有文件和相应的Tensorflow文件，包括了数据图像的注释表 `*.csv` `*.record`
-+ assets 存放截图
-+ exported-models 存放已训练模型的导出版本
-+ images 存放数据集中所有图像的副本，以及为每个图像生成的相应文件用于注释对象的文件 `*.xml` `labelImg`
-+ models 将包含每个训练作业的子文件夹。每个子文件夹将包含训练管道配置文件，以及在模型训练和评估期间生成的所有文件 `*.config`
-+ pre-trained-models 预训练模型
-+ Scripts 存放各类脚本
++ `annotations` 存放所有文件和相应的Tensorflow文件，包括了数据图像的注释表 `*.csv` `*.record`
++ `assets` 存放截图
++ `exported-models` 存放已训练模型的导出版本
++ `images` 存放数据集中所有图像的副本，以及为每个图像生成的相应文件用于注释对象的文件 `*.xml` `labelImg`
++ `models` 将包含每个训练作业的子文件夹。每个子文件夹将包含训练管道配置文件，以及在模型训练和评估期间生成的所有文件 `*.config`
++ `pre-trained-models` 存放预训练模型
++ `Scripts` 存放各个脚本
 
 ## 数据集准备
 
@@ -153,4 +184,4 @@ python ./Scripts/exporter_main_v2.py --input_type image_tensor --pipeline_config
 
 ## 模型测试
 
-测试脚本在仓库目录, `object_detection_camera.py`， 需要`opencv`包，一般来说直接在主目录下运行即可，但是可能需要等待漫长的时间(~~我跑了大概3分钟才出画面~~)。~~如果跑不出来注意修改相对路径~~。
+测试脚本在仓库目录, `object_detection_camera.py`， 需要`opencv`包，一般来说直接在主目录下运行即可，但是可能需要等待漫长的时间(~~我跑了大概1分钟才出画面~~)。~~如果跑不出来注意修改相对路径~~。
