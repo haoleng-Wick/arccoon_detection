@@ -16,11 +16,11 @@
 ```
 # ## Conda ## #
 conda create -n tf2 python=3.9	//创建虚拟环境
-conda activate tf2				//切换环境
+conda activate tf2	//切换环境
 conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0	//安装cuda和cudnn加速
 
 # ## Pip ## #
-python -m pip install tensorflow==2.10.0		//安装tensorflow
+python -m pip install tensorflow==2.10.0	//安装tensorflow
 # pip install tensorflow==2.10.0 -i https://pypi.tuna.tsinghua.edu.cn/simple	//可以用清华源
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"	//验证一下GPU
 ```
@@ -28,13 +28,13 @@ python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU')
 ```
 # ## installation ## #
 git clone https://github.com/tensorflow/models.git	//克隆仓库
-cp -r models /path/to/tensorflow					//把model文件夹放到tensorflow目录下
-cd /path/to/tensorflow/models/research				//切换目录
+cp -r models /path/to/tensorflow	//把model文件夹放到tensorflow目录下
+cd /path/to/tensorflow/models/research	//切换目录
 
-conda install protobuf								//安装protobuf
+conda install protobuf	//安装protobuf
 protoc object_detection\protos\*.proto --python_out=.	//将*proto文件转换为*.py
-cp object_detection\packages\tf2\setup.py .			//复制
-pip install .										//安装objcet-detection
+cp object_detection\packages\tf2\setup.py .	//复制
+pip install .	//安装objcet-detection
 
 # ## test ## #
 python object_detection/builders/model_builder_tf2_test.py	//验证测试一下
@@ -106,7 +106,7 @@ python ./Scripts/generate_tfrecord.py -x ./images/test -l ./annotations/label_ma
 ```
 model {
   ssd {
-    num_classes: 1		// 改为自己要检测的对象类别数量
+    num_classes: 1	// 改为自己要检测的对象类别数量
     image_resizer {
       fixed_shape_resizer {
         height: 640
@@ -116,7 +116,7 @@ model {
     ...
     ...
 train_config {
-  batch_size: 4			// 根据显存大小修改，为2的倍数
+  batch_size: 4	// 根据显存大小修改，为2的倍数
   data_augmentation_options {
     random_horizontal_flip {
     }
@@ -124,8 +124,8 @@ train_config {
     ...
     ...
   fine_tune_checkpoint: "E:\\Johnson_Project\\Tensorflow\\training_demo\\pre-trained-models\\ssd_mobilenet_v2_fpnlite_640x640_coco17_tpu-8\\checkpoint\\ckpt-0"
-  						// 目录自己具体修改 linux环境下用“/”
-  num_steps: 50000		// 学习总步长，可适当修改
+		// 目录自己具体修改 linux环境下用“/”
+  num_steps: 50000	// 学习总步长，可适当修改
   startup_delay_steps: 0.0
   replicas_to_aggregate: 8
   max_number_of_boxes: 100
