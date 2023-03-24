@@ -74,6 +74,22 @@ training_demo/
 
 生成与图片对应的 `*.xml` 文件
 
+**新建标签文件**
+
+`xxx.pbtxt`文件格式如下：
+
+```
+item {
+	id: 1			// 索引从1开始
+	name: 'accoon'
+}
+...
+item {
+	id: n			// 有几个标签就有几个id
+	name: 'xxxxx'
+}
+```
+
 ### 创建Tensor Flow Records文件
 
 需要将图片对应的 `*.xml` 文件转换为TensorFlow支持的 `*.record` 格式文件
